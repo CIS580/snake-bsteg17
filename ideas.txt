@@ -1,0 +1,6 @@
+--Snake, only the "apples" you eat are letters.
+	--Every letter you swallow is appended to your butt.
+	--Every time your butt spells a (common?) word (of rather high minimum length, like 5 or so?) then your length shrinks by that much and you get points based on something like a scrabble word score
+		--or maybe your butt never shrinks
+	--Keep going until you run into yourself
+		--or maybe until you spell a "forbidden" word
