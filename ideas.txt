@@ -4,3 +4,11 @@
 		--or maybe your butt never shrinks
 	--Keep going until you run into yourself
 		--or maybe until you spell a "forbidden" word
+
+	OR
+
+	--Words fall from top of screen
+	--Same deal w/ appending to butt
+	--Press enter to submit butt's word
+	(--Letters to drop show in stack above game frame? Tetris-style?)
+	--Objective: get highest score before time expires (Scrabble-style word points)
