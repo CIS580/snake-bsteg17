@@ -7,6 +7,13 @@ backBuffer.height = frontBuffer.height;
 var backCtx = backBuffer.getContext('2d');
 var oldTime = performance.now();
 
+var snake = new SnakeSection();
+
+var GRID_WIDTH = 30;
+var GRID_HEIGHT = 30;
+var cellWidth = backBuffer.width / GRID_WIDTH;
+var cellHeight = backBuffer.height / GRID_HEIGHT;
+
 /**
  * @function loop
  * The main game loop.
@@ -36,13 +43,7 @@ function loop(newTime) {
  */
 function update(elapsedTime) {
 
-  // TODO: Spawn an apple periodically
-  // TODO: Grow the snake periodically
-  // TODO: Move the snake
-  // TODO: Determine if the snake has moved out-of-bounds (offscreen)
-  // TODO: Determine if the snake has eaten an apple
-  // TODO: Determine if the snake has eaten its tail
-  // TODO: [Extra Credit] Determine if the snake has run into an obstacle
+  
 
 }
 
@@ -55,7 +56,7 @@ function update(elapsedTime) {
 function render(elapsedTime) {
   backCtx.clearRect(0, 0, backBuffer.width, backBuffer.height);
 
-  // TODO: Draw the game objects into the backBuffer
+  snake.draw();
 
 }
 
