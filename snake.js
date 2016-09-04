@@ -5,7 +5,10 @@ var backBuffer = document.createElement('canvas');
 backBuffer.width = frontBuffer.width;
 backBuffer.height = frontBuffer.height;
 var backCtx = backBuffer.getContext('2d');
+
 var oldTime = performance.now();
+var timeSinceLastFrame = 0;
+var milliSecondsPerFrame = 300;
 
 var snake = new SnakeSection();
 
@@ -21,10 +24,16 @@ var cellHeight = backBuffer.height / GRID_HEIGHT;
  */
 function loop(newTime) {
   var elapsedTime = newTime - oldTime;
+  timeSinceLastFrame += elapsedTime;
   oldTime = newTime;
 
-  update(elapsedTime);
-  render(elapsedTime);
+  if (timeSinceLastFrame >= milliSecondsPerFrame) {
+    while (timeSinceLastFrame >= milliSecondsPerFrame) {
+      timeSinceLastFrame -= milliSecondsPerFrame;
+      update();
+    }
+    render();
+  }
 
   // Flip the back buffer
   frontCtx.drawImage(backBuffer, 0, 0);
@@ -42,11 +51,7 @@ function loop(newTime) {
  * the number of milliseconds passed since the last frame.
  */
 function update(elapsedTime) {
-
-  console.log(snake.direction);
   snake.updatePosition();
-  console.log(snake.x, snake.y);
-
 }
 
 /**
@@ -56,10 +61,13 @@ function update(elapsedTime) {
   * the number of milliseconds passed since the last frame.
   */
 function render(elapsedTime) {
-  backCtx.clearRect(0, 0, backBuffer.width, backBuffer.height);
-
+  clearCanvas();
   snake.draw();
+}
 
+function clearCanvas() {
+  backCtx.fillStyle = "white";
+  backCtx.fillRect(0, 0, backBuffer.width, backBuffer.height);
 }
 
 window.onkeydown = function(event) {
