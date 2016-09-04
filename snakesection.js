@@ -32,17 +32,23 @@ SnakeSection.prototype.updatePosition = function() {
 }
 
 SnakeSection.prototype.checkCollision = function() {
+	this._collidingWithWalls();
+}
+
+SnakeSection.prototype.draw = function() {
+	backCtx.fillStyle = "black";
+	backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
+}
+
+/* private */
+
+SnakeSection.prototype._collidingWithWalls = function() {
 	if (this.x < 0 || this.x > GRID_WIDTH) {
 		console.log("COLLISION");
 	}
 	if (this.y < 0 || this.y > GRID_HEIGHT) {
 		console.log("COLLISION");
 	}
-}
-
-SnakeSection.prototype.draw = function() {
-	backCtx.fillStyle = "black";
-	backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
 }
 
 // function wait(ms){
