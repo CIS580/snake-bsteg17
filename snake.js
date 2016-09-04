@@ -10,7 +10,7 @@ var oldTime = performance.now();
 var timeSinceLastFrame = 0;
 var milliSecondsPerFrame = 300;
 
-var snake = new SnakeSection();
+var snake = new SnakeSection(true);
 
 var GRID_WIDTH = 30;
 var GRID_HEIGHT = 30;
@@ -51,7 +51,7 @@ function loop(newTime) {
  * the number of milliseconds passed since the last frame.
  */
 function update(elapsedTime) {
-  snake.updatePosition();
+  snake.update();
 }
 
 /**

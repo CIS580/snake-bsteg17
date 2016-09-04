@@ -1,21 +1,18 @@
-function SnakeSection() {
+function SnakeSection(isHead) {
 	this.x = 10;
 	this.y = 10;
 	this.direction = null;
+	this.isHead = isHead;
+}
+
+SnakeSection.prototype.update = function() {
+	this.updatePosition();
+	if (this.isHead) {
+		this.checkCollision();
+	}
 }
 
 SnakeSection.prototype.updatePosition = function() {
-	this.updateCoordinates();
-}
-
-SnakeSection.prototype.draw = function() {
-	backCtx.fillStyle = "black";
-	backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
-}
-
-/* private */
-
-SnakeSection.prototype.updateCoordinates = function() {
 	switch(this.direction) {
 		case 37:
 			this.x--; //left arrow
@@ -32,6 +29,17 @@ SnakeSection.prototype.updateCoordinates = function() {
 		default:
 			break;
 	}
+}
+
+SnakeSection.prototype.checkCollision = function() {
+	if (this.x > 15) {
+		console.log("COLLISION");
+	}
+}
+
+SnakeSection.prototype.draw = function() {
+	backCtx.fillStyle = "black";
+	backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
 }
 
 // function wait(ms){
