@@ -15,8 +15,8 @@ var GRID_HEIGHT = 30;
 var cellWidth = backBuffer.width / GRID_WIDTH;
 var cellHeight = backBuffer.height / GRID_HEIGHT;
 
-var snake = new SnakeSection(true);
-var letter = new Letter();
+var snake = new SnakeSection(10, 10, true);
+var letters = [new Letter()];
 
 /**
  * @function loop
@@ -53,7 +53,9 @@ function loop(newTime) {
  */
 function update(elapsedTime) {
   snake.update();
-  letter.update();
+  letters.forEach(function(letter) {
+    letter.update();
+  });
 }
 
 /**
@@ -64,7 +66,9 @@ function update(elapsedTime) {
   */
 function render(elapsedTime) {
   clearCanvas();
-  letter.draw();
+  letters.forEach(function(letter) {
+    letter.draw();
+  });
   snake.draw();
 }
 
