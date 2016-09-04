@@ -32,7 +32,10 @@ SnakeSection.prototype.updatePosition = function() {
 }
 
 SnakeSection.prototype.checkCollision = function() {
-	if (this.x > 15) {
+	if (this.x < 0 || this.x > GRID_WIDTH) {
+		console.log("COLLISION");
+	}
+	if (this.y < 0 || this.y > GRID_HEIGHT) {
 		console.log("COLLISION");
 	}
 }
