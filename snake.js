@@ -10,12 +10,13 @@ var oldTime = performance.now();
 var timeSinceLastFrame = 0;
 var milliSecondsPerFrame = 300;
 
-var snake = new SnakeSection(true);
-
 var GRID_WIDTH = 30;
 var GRID_HEIGHT = 30;
 var cellWidth = backBuffer.width / GRID_WIDTH;
 var cellHeight = backBuffer.height / GRID_HEIGHT;
+
+var snake = new SnakeSection(true);
+var letter = new Letter();
 
 /**
  * @function loop
@@ -52,6 +53,7 @@ function loop(newTime) {
  */
 function update(elapsedTime) {
   snake.update();
+  letter.update();
 }
 
 /**
@@ -62,6 +64,7 @@ function update(elapsedTime) {
   */
 function render(elapsedTime) {
   clearCanvas();
+  letter.draw();
   snake.draw();
 }
 
