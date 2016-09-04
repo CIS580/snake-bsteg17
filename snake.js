@@ -43,7 +43,9 @@ function loop(newTime) {
  */
 function update(elapsedTime) {
 
-  
+  console.log(snake.direction);
+  snake.updatePosition();
+  console.log(snake.x, snake.y);
 
 }
 
@@ -58,6 +60,10 @@ function render(elapsedTime) {
 
   snake.draw();
 
+}
+
+window.onkeydown = function(event) {
+  snake.direction = event.keyCode;
 }
 
 /* Launch the game */
