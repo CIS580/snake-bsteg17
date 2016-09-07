@@ -51,7 +51,11 @@ SnakeSection.prototype.checkCollision = function() {
 
 SnakeSection.prototype.draw = function() {
 	backCtx.fillStyle = this.color;
-	backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
+	if (this.isHead) {
+		backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
+	} else {
+		backCtx.strokeText(this.letter, (this.x * cellWidth), ((this.y + 1) * cellHeight), cellWidth);
+	}
 	if (this.child != null) {
 		this.child.draw();
 	}
@@ -88,9 +92,9 @@ SnakeSection.prototype._collidingWithWall = function(nextCell) {
 
 SnakeSection.prototype._collidingWithLetter = function(nextCell) {
 	snake = this;
-	letters.forEach(function(letter) {
+	letters.forEach(function(letter, i) {
 		if (letter.x == nextCell.x && letter.y == nextCell.y) {
-			console.log("collided")
+			letters.splice(i, 1);
 			snake._addChild(letter);
 		}
 	});
