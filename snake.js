@@ -15,7 +15,7 @@ var GRID_HEIGHT = 30;
 var cellWidth = backBuffer.width / GRID_WIDTH;
 var cellHeight = backBuffer.height / GRID_HEIGHT;
 
-var snake = new SnakeSection(10, 10, true);
+var snake = new SnakeSection(10, 10, true, null, null, "black");
 var letters = [new Letter()];
 
 /**
@@ -52,10 +52,10 @@ function loop(newTime) {
  * the number of milliseconds passed since the last frame.
  */
 function update(elapsedTime) {
-  snake.update();
   letters.forEach(function(letter) {
     letter.update();
   });
+  snake.update();
 }
 
 /**
@@ -78,7 +78,7 @@ function clearCanvas() {
 }
 
 window.onkeydown = function(event) {
-  snake.direction = event.keyCode;
+  snake.nextDirection = event.keyCode;
 }
 
 /* Launch the game */

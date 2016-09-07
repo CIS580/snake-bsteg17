@@ -1,33 +1,43 @@
-function SnakeSection(x, y, isHead, parent, letter) {
+function SnakeSection(x, y, isHead, parent, letter, color) {
 	this.x = x;
 	this.y = y;
-	this.direction = null;
+	this.nextDirection = null;
+	this.currentDirection = null;
 	this.isHead = isHead;
 	this.child = null;
-	this.parent = null;
+	this.parent = parent;
 	this.letter = letter;
+	this.color = color;
 }
 
 SnakeSection.prototype.update = function() {
+	this.currentDirection = this.nextDirection;
+	if (this.parent) {
+		this.nextDirection = this.parent.currentDirection;
+		console.log(this.nextDirection)
+	}
 	this.updatePosition();
 	if (this.isHead) {
 		this.checkCollision();
 	}
+	if (this.child) {
+		this.child.update();		
+	}
 }
 
 SnakeSection.prototype.updatePosition = function() {
-	switch(this.direction) {
-		case 37:
-			this.x--; //left arrow
+	switch(this.currentDirection) {
+		case 37: //left arrow
+			this.x--; 
 			break;
-		case 38:
-			this.y--; //up arrow
+		case 38: //up arrow
+			this.y--; 
 			break;
 		case 39: //right arrow
 			this.x++;
 			break;
-		case 40:
-			this.y++; //down arrow
+		case 40: //down arrow
+			this.y++; 
 			break;
 		default:
 			break;
@@ -40,7 +50,7 @@ SnakeSection.prototype.checkCollision = function() {
 }
 
 SnakeSection.prototype.draw = function() {
-	backCtx.fillStyle = "black";
+	backCtx.fillStyle = this.color;
 	backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
 	if (this.child != null) {
 		this.child.draw();
@@ -68,7 +78,34 @@ SnakeSection.prototype._collidingWithLetter = function() {
 }
 
 SnakeSection.prototype._addChild = function(letter) {
-	this.child = new SnakeSection(this.x, this.y, false, this, letter);
+	var childX;
+	var childY;
+	switch(this.currentDirection) {
+		case 37: //left arrow
+			childX = this.x + 1;
+			childY = this.y;
+			break;
+		case 38: //up arrow
+			childX = this.x;
+			childY = this.y + 1;
+			break;
+		case 39: //right arrow
+			childX = this.x - 1;
+			childY = this.y
+			break;
+		case 40: //down arrow
+			childX = this.x;
+			childY = this.y - 1;
+			break;
+		default:
+			break;
+	}
+	// youngest = this;
+	// while (youngest.child != null) {
+		// youngest = youngest.child;
+	// }
+	// youngest.child = new SnakeSection(childX, childY, false, this, letter, "blue");
+	this.child = new SnakeSection(childX, childY, false, this, letter, "blue");
 }
 
 // function wait(ms){
