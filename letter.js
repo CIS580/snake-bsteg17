@@ -13,22 +13,21 @@ Letter.prototype.draw = function() {
 	backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
 }
 
-Letter.initLetters = function() {
-	grid = new Array(GRID_WIDTH);
-	for (i = 0; i < GRID_WIDTH; i++) {
-		grid[i] = new Array(GRID_HEIGHT);
-	}
-
-	letters = [];
+Letter.addLetter = function() {
 	var row;
 	var column;
+	do {
+		row = Math.floor(Math.random() * GRID_HEIGHT);
+		column = Math.floor(Math.random() * GRID_WIDTH);
+	} while (grid[row][column] != null);
+	grid[row][column] = "not null";
+	return new Letter(row, column);
+}
+
+Letter.initLetters = function() {
+	letters = [];
 	for (i = 0; i < NUM_LETTERS; i++) {
-		do {
-			row = Math.floor(Math.random() * GRID_HEIGHT);
-			column = Math.floor(Math.random() * GRID_WIDTH);
-		} while (grid[row][column] != null);
-		grid[row][column] = "not null";
-		letters.push( new Letter(row, column) );
+		letters.push( Letter.addLetter() );
 	}
 	return letters;
 }

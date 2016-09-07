@@ -18,7 +18,16 @@ var cellHeight = backBuffer.height / GRID_HEIGHT;
 var NUM_LETTERS = 100;
 var LETTER_MAX_SPEED = 2;
 
-var snake = new SnakeSection(10, 10, true, null, null, "black");
+var SNAKE_STARTING_X = 10;
+var SNAKE_STARTING_Y = 10;
+
+var grid = new Array(GRID_WIDTH);
+for (i = 0; i < GRID_WIDTH; i++) {
+  grid[i] = new Array(GRID_HEIGHT);
+}
+grid[SNAKE_STARTING_X][SNAKE_STARTING_Y] = "not null";
+
+var snake = new SnakeSection(SNAKE_STARTING_X, SNAKE_STARTING_Y, true, null, null, "black");
 var letters = Letter.initLetters();
 
 /**
