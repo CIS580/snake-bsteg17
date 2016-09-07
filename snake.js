@@ -15,8 +15,10 @@ var GRID_HEIGHT = 30;
 var cellWidth = backBuffer.width / GRID_WIDTH;
 var cellHeight = backBuffer.height / GRID_HEIGHT;
 
+var NUM_LETTERS = 5;
+
 var snake = new SnakeSection(10, 10, true, null, null, "black");
-var letters = [new Letter()];
+var letters = Letter.initLetters();
 
 /**
  * @function loop
