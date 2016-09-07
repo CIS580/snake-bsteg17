@@ -99,15 +99,16 @@ SnakeSection.prototype._collidingWithLetter = function(nextCell) {
 SnakeSection.prototype._addChild = function(letter) {
 	var childX;
 	var childY;
-	youngest = this;
-	n = 1;
-	while (youngest.child != null) {
-		youngest = youngest.child;
-		console.log(n+" children")
-		n++;
+	tail = snake._getTail();
+	tail.child = new SnakeSection(tail.x, tail.y, false, tail, letter, "blue");
+}
+
+SnakeSection.prototype._getTail = function() {
+	tail = this;
+	while (tail.child != null) {
+		tail = tail.child;
 	}
-	console.log(youngest)
-	youngest.child = new SnakeSection(youngest.x, youngest.y, false, youngest, letter, "blue");
+	return tail;
 }
 
 // function wait(ms){
