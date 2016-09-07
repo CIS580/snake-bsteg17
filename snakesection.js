@@ -14,12 +14,11 @@ SnakeSection.prototype.update = function() {
 	this.currentDirection = this.nextDirection;
 	if (this.parent) {
 		this.nextDirection = this.parent.currentDirection;
-		console.log(this.nextDirection)
 	}
-	this.updatePosition();
 	if (this.isHead) {
 		this.checkCollision();
 	}
+	this.updatePosition();
 	if (this.child) {
 		this.child.update();		
 	}
@@ -45,8 +44,9 @@ SnakeSection.prototype.updatePosition = function() {
 }
 
 SnakeSection.prototype.checkCollision = function() {
-	this._collidingWithWall();
-	this._collidingWithLetter();
+	nextCell = snake._getNextCell();
+	this._collidingWithWall(nextCell);
+	this._collidingWithLetter(nextCell);
 }
 
 SnakeSection.prototype.draw = function() {
@@ -59,19 +59,38 @@ SnakeSection.prototype.draw = function() {
 
 /* private */
 
-SnakeSection.prototype._collidingWithWall = function() {
-	if (this.x < 0 || this.x > GRID_WIDTH) {
+SnakeSection.prototype._getNextCell = function() {
+	switch(this.currentDirection) {
+		case 37: //left arrow
+			return {x:(this.x - 1), y:(this.y)}; 
+		case 38: //up arrow
+			return {x:(this.x), y:(this.y - 1)}; 
+		case 39: //right arrow
+			return {x:(this.x + 1), y:(this.y)}; 
+		case 40: //down arrow
+			return {x:(this.x), y:(this.y + 1)}; 
+		default:
+			return {x:0, y:0};
+	}
+}
+
+SnakeSection.prototype._collidingWithWall = function(nextCell) {
+	if (!nextCell) {
+		return;
+	}
+	if (nextCell.x < 0 || nextCell.x > GRID_WIDTH) {
 		console.log("COLLISION");
 	}
-	if (this.y < 0 || this.y > GRID_HEIGHT) {
+	if (nextCell.y < 0 || nextCell.y > GRID_HEIGHT) {
 		console.log("COLLISION");
 	}
 }
 
-SnakeSection.prototype._collidingWithLetter = function() {
+SnakeSection.prototype._collidingWithLetter = function(nextCell) {
 	snake = this;
 	letters.forEach(function(letter) {
-		if (letter.x == snake.x && letter.y == snake.y) {
+		if (letter.x == nextCell.x && letter.y == nextCell.y) {
+			console.log("collided")
 			snake._addChild(letter);
 		}
 	});
@@ -80,32 +99,15 @@ SnakeSection.prototype._collidingWithLetter = function() {
 SnakeSection.prototype._addChild = function(letter) {
 	var childX;
 	var childY;
-	switch(this.currentDirection) {
-		case 37: //left arrow
-			childX = this.x + 1;
-			childY = this.y;
-			break;
-		case 38: //up arrow
-			childX = this.x;
-			childY = this.y + 1;
-			break;
-		case 39: //right arrow
-			childX = this.x - 1;
-			childY = this.y
-			break;
-		case 40: //down arrow
-			childX = this.x;
-			childY = this.y - 1;
-			break;
-		default:
-			break;
+	youngest = this;
+	n = 1;
+	while (youngest.child != null) {
+		youngest = youngest.child;
+		console.log(n+" children")
+		n++;
 	}
-	// youngest = this;
-	// while (youngest.child != null) {
-		// youngest = youngest.child;
-	// }
-	// youngest.child = new SnakeSection(childX, childY, false, this, letter, "blue");
-	this.child = new SnakeSection(childX, childY, false, this, letter, "blue");
+	console.log(youngest)
+	youngest.child = new SnakeSection(youngest.x, youngest.y, false, youngest, letter, "blue");
 }
 
 // function wait(ms){
