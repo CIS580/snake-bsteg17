@@ -54,6 +54,7 @@ SnakeSection.prototype.draw = function() {
 	if (this.isHead) {
 		backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
 	} else {
+		backCtx.strokeStyle = "purple";
 		backCtx.strokeText(this.letter, (this.x * cellWidth), ((this.y + 1) * cellHeight), cellWidth);
 	}
 	if (this.child != null) {
@@ -104,7 +105,7 @@ SnakeSection.prototype._addChild = function(letter) {
 	var childX;
 	var childY;
 	tail = snake._getTail();
-	tail.child = new SnakeSection(tail.x, tail.y, false, tail, letter, "blue");
+	tail.child = new SnakeSection(tail.x, tail.y, false, tail, letter.letter, "blue");
 }
 
 SnakeSection.prototype._getTail = function() {

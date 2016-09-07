@@ -10,6 +10,7 @@ Letter.prototype.update = function() {
 
 Letter.prototype.draw = function() {
 	backCtx.font = cellHeight+"px Arial";
+	backCtx.strokeStyle = "black";
 	backCtx.strokeText(this.letter, (this.x * cellWidth), ((this.y + 1) * cellHeight), cellWidth);
 }
 
