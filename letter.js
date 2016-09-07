@@ -1,7 +1,7 @@
 function Letter(x, y) {
 	this.x = x;
 	this.y = y;
-	this.letter = "A";
+	this.letter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
 }
 
 Letter.prototype.update = function() {
@@ -9,8 +9,8 @@ Letter.prototype.update = function() {
 }
 
 Letter.prototype.draw = function() {
-	backCtx.fillStyle = "red";
-	backCtx.fillRect((this.x * cellWidth), (this.y * cellHeight), cellWidth, cellHeight);
+	backCtx.font = cellHeight+"px Arial";
+	backCtx.strokeText(this.letter, (this.x * cellWidth), ((this.y + 1) * cellHeight), cellWidth);
 }
 
 Letter.addLetter = function() {
