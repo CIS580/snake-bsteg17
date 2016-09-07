@@ -1,8 +1,0 @@
---worm movement
---worm collision (including w/ self)
---falling letters
---appending letters to worm
---quick way to check if words are valid
---timer
---to-be-dropped letters at top of screen
---end game screen
