@@ -28,6 +28,7 @@ for (i = 0; i < GRID_WIDTH; i++) {
 grid[SNAKE_STARTING_X][SNAKE_STARTING_Y] = "not null";
 
 var snake = new SnakeSection(SNAKE_STARTING_X, SNAKE_STARTING_Y, true, null, null, "black");
+snake.nextDirection = 39; //right arrow
 var letters = Letter.initLetters();
 
 document.getElementById("points").innerHTML = 0;
