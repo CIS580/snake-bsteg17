@@ -68,13 +68,13 @@ SnakeSection.prototype.draw = function() {
 SnakeSection.prototype._getNextCell = function() {
 	switch(this.currentDirection) {
 		case 37: //left arrow
-			return {x:(this.x - 1), y:(this.y)}; 
+			return {x:(this.x - 1), y:(this.y)};
 		case 38: //up arrow
-			return {x:(this.x), y:(this.y - 1)}; 
+			return {x:(this.x), y:(this.y - 1)};
 		case 39: //right arrow
-			return {x:(this.x + 1), y:(this.y)}; 
+			return {x:(this.x + 1), y:(this.y)};
 		case 40: //down arrow
-			return {x:(this.x), y:(this.y + 1)}; 
+			return {x:(this.x), y:(this.y + 1)};
 		default:
 			return {x:0, y:0};
 	}
@@ -111,6 +111,7 @@ SnakeSection.prototype._collidingWithLetter = function(nextCell) {
 		if (letter.x == nextCell.x && letter.y == nextCell.y) {
 			letters.splice(i, 1);
 			snake._addChild(letter);
+			document.getElementById("points").innerHTML++;
 		}
 	});
 }

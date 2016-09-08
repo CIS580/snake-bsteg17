@@ -30,6 +30,8 @@ grid[SNAKE_STARTING_X][SNAKE_STARTING_Y] = "not null";
 var snake = new SnakeSection(SNAKE_STARTING_X, SNAKE_STARTING_Y, true, null, null, "black");
 var letters = Letter.initLetters();
 
+document.getElementById("points").innerHTML = 0;
+
 /**
  * @function loop
  * The main game loop.
