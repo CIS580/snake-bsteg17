@@ -84,11 +84,11 @@ SnakeSection.prototype._collidingWithWall = function(nextCell) {
 	if (!nextCell) {
 		return;
 	}
-	if (nextCell.x < 0 || nextCell.x > GRID_WIDTH) {
-		console.log("COLLISION");
+	if (nextCell.x < 0 || nextCell.x >= GRID_WIDTH) {
+		endGame();
 	}
-	if (nextCell.y < 0 || nextCell.y > GRID_HEIGHT) {
-		console.log("COLLISION");
+	if (nextCell.y < 0 || nextCell.y >= GRID_HEIGHT) {
+		endGame();
 	}
 }
 
@@ -99,7 +99,7 @@ SnakeSection.prototype._collidingWithSelf = function(nextCell) {
 	section = snake;
 	while (section.child != null) {
 		if (section.child.x == snake.x && section.child.y == snake.y) {
-			console.log("COLLISION");
+			endGame();
 		}
 		section = section.child;
 	}
@@ -111,7 +111,11 @@ SnakeSection.prototype._collidingWithLetter = function(nextCell) {
 		if (letter.x == nextCell.x && letter.y == nextCell.y) {
 			letters.splice(i, 1);
 			snake._addChild(letter);
-			document.getElementById("points").innerHTML++;
+			if (document.getElementById("points").innerHTML < 50) {
+				document.getElementById("points").innerHTML++;				
+			} else {
+				winGame();
+			}
 		}
 	});
 }

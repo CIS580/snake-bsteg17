@@ -91,6 +91,18 @@ function clearCanvas() {
   backCtx.fillRect(0, 0, backBuffer.width, backBuffer.height);
 }
 
+function endGame() {
+  document.getElementsByTagName("body")[0].removeChild(document.getElementById("snake"));
+  gameOverHTML = '<h2>GAME OVER</h2><br /><img src="https://media.giphy.com/media/nyoPqKlzINpHq/giphy.gif" height="600px" width="800px" />';
+  document.getElementsByTagName("body")[0].innerHTML = gameOverHTML;
+}
+
+function winGame() {
+  document.getElementsByTagName("body")[0].removeChild(document.getElementById("snake"));
+  gameOverHTML = '<h2>YOU WIN</h2><br /><img src="https://media.giphy.com/media/5nAQJljp31ztC/giphy.gif" height="600px" width="800px" />';
+  document.getElementsByTagName("body")[0].innerHTML = gameOverHTML;
+}
+
 window.onkeydown = function(event) {
   snake.nextDirection = event.keyCode;
 }
