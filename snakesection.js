@@ -46,6 +46,7 @@ SnakeSection.prototype.updatePosition = function() {
 SnakeSection.prototype.checkCollision = function() {
 	nextCell = snake._getNextCell();
 	this._collidingWithWall(nextCell);
+	this._collidingWithSelf(nextCell);
 	this._collidingWithLetter(nextCell);
 }
 
@@ -88,6 +89,19 @@ SnakeSection.prototype._collidingWithWall = function(nextCell) {
 	}
 	if (nextCell.y < 0 || nextCell.y > GRID_HEIGHT) {
 		console.log("COLLISION");
+	}
+}
+
+SnakeSection.prototype._collidingWithSelf = function(nextCell) {
+	if(!nextCell) {
+		return;
+	}
+	section = snake;
+	while (section.child != null) {
+		if (section.child.x == snake.x && section.child.y == snake.y) {
+			console.log("COLLISION");
+		}
+		section = section.child;
 	}
 }
 
